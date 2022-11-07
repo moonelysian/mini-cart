@@ -17,6 +17,11 @@ class CartList {
     this.setState(newState);
   }
 
+  removeCartItem(productId) {
+    const newState = this.state.filter(item => item.id !== productId);
+    this.setState(newState);
+  }
+
   totalPrice() {
     return this.state.reduce((acc, product) => acc + (product.price  * product.count), 0);
   }

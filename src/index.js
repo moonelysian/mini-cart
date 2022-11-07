@@ -27,6 +27,10 @@ const toggleCart = () => {
   $backdrop.hidden = !$backdrop.hidden;
 };
 
+const calcTotalPrice = () => {
+  $cartTotalCount.innerText = `${cartList.totalPrice().toLocaleString()}원`;
+}
+
 const addCartItem = (e) => {
   const clickedProductId = parseInt(e.target.dataset.productid);
   if (!clickedProductId) {
@@ -37,11 +41,20 @@ const addCartItem = (e) => {
     return;
   }
   cartList.addCartItem(product);
-  $cartTotalCount.innerText = `${cartList.totalPrice().toLocaleString()}원`;
+  calcTotalPrice();
   toggleCart();
+}
+
+const removeCart = (e) => {
+  if (e.target.className === 'remove-btn') {
+    const currentProductId = parseInt(e.target.closest('li').id);
+    cartList.removeCartItem(currentProductId);
+    calcTotalPrice();
+  }
 }
 
 $openCartButton.addEventListener('click', toggleCart);
 $closeCartButton.addEventListener('click', toggleCart);
 $backdrop.addEventListener('click', toggleCart);
 $productListGrid.addEventListener('click',  addCartItem);
+$cartList.addEventListener('click', removeCart);
