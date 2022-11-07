@@ -17,6 +17,10 @@ class CartList {
     this.setState(newState);
   }
 
+  totalPrice() {
+    return this.state.reduce((acc, product) => acc + (product.price  * product.count), 0);
+  }
+
   render() {
     this.$section.innerHTML = this.state
       .map(({ id, imgSrc, name, price, count }) =>`

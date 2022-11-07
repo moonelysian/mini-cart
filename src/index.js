@@ -7,7 +7,8 @@ const $shoppingCartSection = document.getElementById('shopping-cart');
 const $openCartButton = document.getElementById('open-cart-btn');
 const $closeCartButton = document.getElementById('close-cart-btn');
 const $backdrop = document.getElementById('backdrop');
-const $cartList = document.getElementById('cart-list')
+const $cartList = document.getElementById('cart-list');
+const $cartTotalCount = document.getElementById('total-count');
 
 let productData = [];
 
@@ -36,6 +37,7 @@ const addCartItem = (e) => {
     return;
   }
   cartList.addCartItem(product);
+  $cartTotalCount.innerText = `${cartList.totalPrice().toLocaleString()}원`;
   toggleCart();
 }
 
