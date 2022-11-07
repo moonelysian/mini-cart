@@ -1,1 +1,3 @@
-// 이 곳에 정답 코드를 작성해주세요.
+import getProducts from "./api/ProductApi.js";
+
+const data = await getProducts();
