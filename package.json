@@ -5,14 +5,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hanameee/mini-cart.git"
+    "url": "git+https://github.com/moonelysian/mini-cart.git"
   },
-  "author": "hanameee",
+  "author": "moonelysian",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hanameee/mini-cart/issues"
+    "url": "https://github.com/moonelysian/mini-cart/issues"
   },
-  "homepage": "https://github.com/hanameee/mini-cart#readme",
+  "homepage": "https://github.com/moonelysian/mini-cart#readme",
   "dependencies": {
     "fetch": "^1.1.0"
   },
