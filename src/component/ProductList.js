@@ -10,6 +10,9 @@
   }
 
   render() {
+    if (this.state.length === 0) {
+      return this.$target.innerHTML = '<h3>상품이 없습니다.</h3> '
+    }
     const productCards = this.state.map(product => {
       return `    
         <article id="product-card">
