@@ -8,7 +8,6 @@ const $openCartButton = document.getElementById('open-cart-btn');
 const $closeCartButton = document.getElementById('close-cart-btn');
 const $backdrop = document.getElementById('backdrop');
 const $cartList = document.getElementById('cart-list');
-const $cartTotalCount = document.getElementById('total-count');
 
 let productData = [];
 
@@ -27,10 +26,6 @@ const toggleCart = () => {
   $backdrop.hidden = !$backdrop.hidden;
 };
 
-const calcTotalPrice = () => {
-  $cartTotalCount.innerText = `${cartList.totalPrice().toLocaleString()}원`;
-}
-
 const addCartItem = (e) => {
   const clickedProductId = parseInt(e.target.dataset.productid);
   if (!clickedProductId) {
@@ -41,7 +36,6 @@ const addCartItem = (e) => {
     return;
   }
   cartList.addCartItem(product);
-  calcTotalPrice();
   toggleCart();
 }
 
@@ -49,7 +43,6 @@ const removeCart = (e) => {
   if (e.target.className === 'remove-btn') {
     const currentProductId = parseInt(e.target.closest('li').id);
     cartList.removeCartItem(currentProductId);
-    calcTotalPrice();
   }
 }
 

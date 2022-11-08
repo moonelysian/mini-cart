@@ -1,3 +1,5 @@
+const $cartTotalCount = document.getElementById('total-count');
+
 class CartList {
   constructor($target, state) {
     this.state = state;
@@ -13,8 +15,13 @@ class CartList {
   } 
 
   addCartItem(product) {
-    const newState = [...this.state, {...product, count: 1}];
-    this.setState(newState);
+    const index = this.state.findIndex(item => item.id == product.id);
+    if (index < 0) {
+      return this.setState([...this.state, {...product, count: 1}]);
+    }
+    const newState = [...this.state]
+    newState[index].count += 1
+    return this.setState(newState);
   }
 
   removeCartItem(productId) {
@@ -23,7 +30,7 @@ class CartList {
   }
 
   totalPrice() {
-    return this.state.reduce((acc, product) => acc + (product.price  * product.count), 0);
+    return this.state.reduce((acc, product) => acc + (product.price * product.count), 0);
   }
 
   render() {
@@ -56,6 +63,11 @@ class CartList {
           </div>
         </li>
       `).join('');
+
+    $cartTotalCount.innerHTML = 
+      this.state
+      .reduce((acc, cur) => acc + cur.price * cur.count, 0)
+      .toLocaleString() + '원';
   }
  }
 
