@@ -49,6 +49,10 @@ class CartList {
     this.setState(newState);
   }
 
+  saveCartToStorage() {
+    return localStorage.setItem('cartState', JSON.stringify(this.state));
+  }
+
   render() {
     this.$section.innerHTML = this.state
       .map(({ id, imgSrc, name, price, count }) =>`

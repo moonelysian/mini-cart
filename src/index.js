@@ -8,17 +8,26 @@ const $openCartButton = document.getElementById('open-cart-btn');
 const $closeCartButton = document.getElementById('close-cart-btn');
 const $backdrop = document.getElementById('backdrop');
 const $cartList = document.getElementById('cart-list');
+const $payButton = document.getElementById('payment-btn');
 
 let productData = [];
+let cartItems = [];
 
-const productList = new ProductList($productListGrid, productData);
-const cartList = new CartList($cartList, []);
+const initCartItems = () => {
+  const savedCartState = localStorage.getItem('cartState');
+  if (savedCartState) {
+    cartItems = JSON.parse(savedCartState);
+    cartList.setState(cartItems);
+  }
+};
 
-const fetchProductDatas = async () => {
+const initProductData = async () => {
   productData = await getProducts();
   productList.setState(productData);
 }
-fetchProductDatas();
+
+const productList = new ProductList($productListGrid, productData);
+const cartList = new CartList($cartList, []);
 
 const toggleCart = () => {
   $shoppingCartSection.classList.toggle('translate-x-full');
@@ -52,8 +61,16 @@ const modifyCartItem = (e) => {
   }
 }
 
+const saveCartToLocal = () => {
+  return cartList.saveCartToStorage();
+}
+
 $openCartButton.addEventListener('click', toggleCart);
 $closeCartButton.addEventListener('click', toggleCart);
 $backdrop.addEventListener('click', toggleCart);
 $productListGrid.addEventListener('click',  addCartItem);
 $cartList.addEventListener('click', modifyCartItem);
+$payButton.addEventListener('click', saveCartToLocal);
+
+initProductData();
+initCartItems();
