@@ -39,10 +39,16 @@ const addCartItem = (e) => {
   toggleCart();
 }
 
-const removeCart = (e) => {
+const modifyCartItem = (e) => {
+  const currentProductId = parseInt(e.target.closest('li').id);
   if (e.target.className === 'remove-btn') {
-    const currentProductId = parseInt(e.target.closest('li').id);
-    cartList.removeCartItem(currentProductId);
+    return cartList.removeCartItem(currentProductId);
+  }
+  if (e.target.className === 'increase-btn') {
+    return cartList.increaseItemCount(currentProductId);
+  }
+  if (e.target.className === 'decrease-btn') {
+    return cartList.decreaseItemCount(currentProductId);
   }
 }
 
@@ -50,4 +56,4 @@ $openCartButton.addEventListener('click', toggleCart);
 $closeCartButton.addEventListener('click', toggleCart);
 $backdrop.addEventListener('click', toggleCart);
 $productListGrid.addEventListener('click',  addCartItem);
-$cartList.addEventListener('click', removeCart);
+$cartList.addEventListener('click', modifyCartItem);

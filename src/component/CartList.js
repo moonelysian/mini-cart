@@ -29,8 +29,24 @@ class CartList {
     this.setState(newState);
   }
 
-  totalPrice() {
-    return this.state.reduce((acc, product) => acc + (product.price * product.count), 0);
+  increaseItemCount(productId) {
+    const index = this.state.findIndex(item => item.id == productId);
+    if (this.state[index].count === 10) {
+      return alert("장바구니에 담을 수 있는 최대 수량은 10개입니다.");
+    }
+    const newState = [...this.state];
+    newState[index].count += 1;
+    this.setState(newState);
+  }
+
+  decreaseItemCount(productId) {
+    const index = this.state.findIndex(item => item.id == productId);
+    if (this.state[index].count === 1) {
+      return alert("장바구니에 담을 수 있는 최소 수량은 1개입니다.");
+    }
+    const newState = [...this.state];
+    newState[index].count -= 1;
+    this.setState(newState);
   }
 
   render() {
